@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
@@ -26,4 +26,6 @@ require __DIR__ . '/auth.php';
 
 
 // dashboard
-Route::get('/{page}', [AdminController::class, 'index']);
+Route::middleware('auth')->group(function () {
+    Route::get('/{page}', [AdminController::class, 'index']);
+});

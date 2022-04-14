@@ -409,7 +409,7 @@
 											<li class="list-group-item d-flex align-items-center">
 												<img alt="" class="ml-3 rounded-circle avatar-md" src="{{URL::asset('assets/img/faces/5.jpg')}}">
 												<div>
-													<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Adrian Monino</h6><span class="d-block tx-13 text-muted">Premium Member</span>
+													<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Adrian Monino</h6><span class="d-block tx-13 text-muted">{{auth()->user()->email}}</span>
 												</div>
 												<div class="d-flex float-right mr-auto">
 													<a href="#" class="btn btn-outline-light btn-icon ml-2">
@@ -423,7 +423,7 @@
 											<li class="list-group-item d-flex align-items-center">
 												<img alt="" class="ml-3 rounded-circle avatar-md" src="{{URL::asset('assets/img/faces/6.jpg')}}">
 												<div>
-													<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Joel Mendez</h6><span class="d-block tx-13 text-muted">Premium Member</span>
+													<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Joel Mendez</h6><span class="d-block tx-13 text-muted">{{auth()->user()->email}}</span>
 												</div>
 												<div class="d-flex float-right mr-auto">
 													<a href="#" class="btn btn-outline-light btn-icon ml-2">
@@ -437,7 +437,7 @@
 											<li class="list-group-item d-flex align-items-center">
 												<img alt="" class="ml-3 rounded-circle avatar-md" src="{{URL::asset('assets/img/faces/15.jpg')}}">
 												<div>
-													<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Joel Mendez</h6><span class="d-block tx-13 text-muted">Premium Member</span>
+													<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Joel Mendez</h6><span class="d-block tx-13 text-muted">{{auth()->user()->email}}</span>
 												</div>
 												<div class="d-flex float-right mr-auto">
 													<a href="#" class="btn btn-outline-light btn-icon ml-2">
@@ -451,7 +451,7 @@
 											<li class="list-group-item d-flex align-items-center">
 												<img alt="" class="ml-3 rounded-circle avatar-md" src="{{URL::asset('assets/img/faces/12.jpg')}}">
 												<div>
-													<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Marianne Audrey</h6><span class="d-block tx-13 text-muted">Premium Member</span>
+													<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Marianne Audrey</h6><span class="d-block tx-13 text-muted">{{auth()->user()->email}}</span>
 												</div>
 												<div class="d-flex float-right mr-auto">
 													<a href="#" class="btn btn-outline-light btn-icon ml-2">
@@ -474,7 +474,7 @@
 	<li class="list-group-item d-flex align-items-center">
 		<img alt="" class="ml-3 rounded-circle avatar-md" src="{{URL::asset('assets/img/faces/5.jpg')}}">
 		<div>
-			<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Adrian Monino</h6><span class="d-block tx-13 text-muted">Premium Member</span>
+			<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Adrian Monino</h6><span class="d-block tx-13 text-muted">{{auth()->user()->email}}</span>
 		</div>
 		<div class="d-flex float-right mr-auto">
 			<a href="#" class="btn btn-outline-light btn-icon ml-2">
@@ -488,7 +488,7 @@
 	<li class="list-group-item d-flex align-items-center">
 		<img alt="" class="ml-3 rounded-circle avatar-md" src="{{URL::asset('assets/img/faces/6.jpg')}}">
 		<div>
-			<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Joel Mendez</h6><span class="d-block tx-13 text-muted">Premium Member</span>
+			<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Joel Mendez</h6><span class="d-block tx-13 text-muted">{{auth()->user()->email}}</span>
 		</div>
 		<div class="d-flex float-right mr-auto">
 			<a href="#" class="btn btn-outline-light btn-icon ml-2">
@@ -502,7 +502,7 @@
 	<li class="list-group-item d-flex align-items-center">
 		<img alt="" class="ml-3 rounded-circle avatar-md" src="{{URL::asset('assets/img/faces/6.jpg')}}">
 		<div>
-			<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Joel Mendez</h6><span class="d-block tx-13 text-muted">Premium Member</span>
+			<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Joel Mendez</h6><span class="d-block tx-13 text-muted">{{auth()->user()->email}}</span>
 		</div>
 		<div class="d-flex float-right mr-auto">
 			<a href="#" class="btn btn-outline-light btn-icon ml-2">
@@ -516,7 +516,7 @@
 	<li class="list-group-item d-flex align-items-center">
 		<img alt="" class="ml-3 rounded-circle avatar-md" src="{{URL::asset('assets/img/faces/12.jpg')}}">
 		<div>
-			<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Marianne Audrey</h6><span class="d-block tx-13 text-muted">Premium Member</span>
+			<h6 class="tx-15 mb-1 tx-inverse tx-semibold mg-b-0">Marianne Audrey</h6><span class="d-block tx-13 text-muted">{{auth()->user()->email}}</span>
 		</div>
 		<div class="d-flex float-right mr-auto">
 			<a href="#" class="btn btn-outline-light btn-icon ml-2">
