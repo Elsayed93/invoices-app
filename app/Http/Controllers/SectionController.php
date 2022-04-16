@@ -67,7 +67,12 @@ class SectionController extends Controller
      */
     public function edit(Section $section)
     {
-        //
+        $view = view('sections._edit', compact('section'))->render();
+
+        return response()->json([
+            'data' => $view,
+            'status' => 'success',
+        ]);
     }
 
     /**
@@ -77,9 +82,18 @@ class SectionController extends Controller
      * @param  \App\Models\Section  $section
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Section $section)
+    public function update(SectionRequest $request, Section $section)
     {
-        //
+
+        $data = $request->validated();
+
+        $section = $section->update($data);
+
+        if ($section) {
+            return redirect()->route('sections.index')->with('success', 'تم التعديل بنجاح');
+        } else {
+            return redirect()->back()->with('error', 'فضلت عملية التعديل');
+        }
     }
 
     /**
@@ -90,6 +104,12 @@ class SectionController extends Controller
      */
     public function destroy(Section $section)
     {
-        //
+        $section = $section->delete();
+
+        if ($section) {
+            return redirect()->route('sections.index')->with('success', 'تم المسح بنجاح');
+        } else {
+            return redirect()->back()->with('error', 'فضلت عملية المسح');
+        }
     }
 }

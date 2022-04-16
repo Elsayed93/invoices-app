@@ -143,6 +143,7 @@
                 </a>
 
                 <ul class="slide-menu">
+                    {{-- sections --}}
                     <li>
                         <a class="slide-item" href="{{ route('sections.index')}}">
                             الأقسام

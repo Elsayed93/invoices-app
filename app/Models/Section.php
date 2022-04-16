@@ -10,6 +10,6 @@ class Section extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'notes',
+        'description',
     ];
 }

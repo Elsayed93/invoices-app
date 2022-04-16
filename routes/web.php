@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     // invoices 
     Route::resource('invoices', InvoiceController::class);
     // sections
-    Route::get('sections', [SectionController::class, 'index'])->name('sections.index');
+    Route::resource('sections', SectionController::class);
     // 
     Route::post('sections', [SectionController::class, 'store'])->name('sections.store');
 

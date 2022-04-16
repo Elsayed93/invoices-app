@@ -26,6 +26,13 @@
     </div>
 
 
+    @if (session()->has('success'))
+        @include('partials._success')
+    @elseif(session()->has('error'))
+        @include('partials._failed')
+    @endif
+
+
     <!-- row opened -->
     <div class="row row-sm">
 
@@ -58,11 +65,16 @@
                                         <td class="wd-15p border-bottom-0">{{ $section->name }}</td>
                                         <td class="wd-15p border-bottom-0">{{ $section->description }}</td>
                                         <td class="wd-25p border-bottom-0">
-                                            <a href="#" class="btn btn-primary btn-sm" data-target="#editmodal"
-                                                data-toggle="modal">
+                                            <a href="#" class="btn btn-primary btn-sm editBtn" data-target="#editmodal"
+                                                data-toggle="modal" data-id="{{ $section->id }}">
                                                 Edit
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-sm">Delete</a>
+
+                                            <form action="{{ route('sections.destroy', $section->id) }}" method="post" style="display: inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a href="#" class="btn btn-danger btn-sm deleteBtn">Delete</a>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -118,7 +130,7 @@
     <!-- Edit modal -->
     <div class="modal" id="editmodal">
         <div class="modal-dialog edit-modal-container" role="document">
-          
+
         </div>
     </div>
     <!-- End Edit modal -->
@@ -172,4 +184,51 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('.editBtn').on('click', function(e) {
+                e.preventDefault();
+
+                // send ajax with section id to get section data 
+                let id = $(this).data('id');
+                let url = "{{ route('sections.edit', ':id') }}";
+                url = url.replace(':id', id);
+
+
+                $.ajax({
+                    // type: "get",
+                    url: url,
+                    // dataType: "json",
+
+                    success: function(data) {
+                        // console.log('success', data);
+                        console.log(data.status === 'success');
+                        if (data.status === 'success') {
+                            $('.edit-modal-container').append(data.data);
+                        }
+                    },
+
+
+                    error: function(data) {
+                        console.log('success', data);
+                    },
+                });
+
+            });
+
+        });
+    </script>
+
+    {{-- delete row --}}
+    <script>
+        $(document).ready(function() {
+            $('.deleteBtn').on('click', function(e) {
+                e.preventDefault();
+                $(this).closest('form').submit();
+
+            });
+        });
+    </script>
 @endsection
