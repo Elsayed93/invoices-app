@@ -1,12 +1,8 @@
 @extends('layouts.master')
 
-@section('page-title', 'الفواتير')
+@section('page-title', 'المنتجات')
 
 @section('css')
-    <!--  Owl-carousel css-->
-    <link href="{{ URL::asset('assets/plugins/owl-carousel/owl.carousel.css') }}" rel="stylesheet" />
-    <!-- Maps css -->
-    <link href="{{ URL::asset('assets/plugins/jqvmap/jqvmap.min.css') }}" rel="stylesheet">
 
     <link href="{{ URL::asset('assets/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
@@ -21,13 +17,24 @@
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
             <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">الفواتير</h4>
+                <h4 class="content-title mb-0 my-auto">الإعدادات</h4>
                 <span class="text-muted mt-1 tx-13 mr-2 mb-0">
-                    / قائمة الفواتير
+                    / قائمة المنتجات
                 </span>
             </div>
         </div>
     </div>
+
+
+    @if (session()->has('success'))
+        @include('partials._success')
+    @elseif(session()->has('error'))
+        @include('partials._failed')
+    @endif
+
+    @if ($errors->any())
+        @include('partials._errors')
+    @endif
 
 
     <!-- row opened -->
@@ -35,50 +42,50 @@
 
         <!--div-->
         <div class="col-xl-12">
-            <div class="card mg-b-20">
+            <div class="card">
                 <div class="card-header pb-0">
                     <div class="d-flex justify-content-between">
-                        <h4 class="card-title mg-b-0">Bordered Table</h4>
+                        <h4 class="card-title mg-b-0">المنتجات</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
-                    <p class="tx-12 tx-gray-500 mb-2">Example of Valex Bordered Table.. <a href="">Learn more</a></p>
+                    <a class="btn ripple btn-primary" data-target="#addModal" data-toggle="modal" href="">إضافة منتج</a>
                 </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="example" class="table key-buttons text-md-nowrap">
+                        <table class="table text-md-nowrap" id="example1">
                             <thead>
                                 <tr>
-                                    <th class="border-bottom-0">#</th>
-                                    <th class="border-bottom-0">رقم الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الفاتورة</th>
-                                    <th class="border-bottom-0">تاريخ الإستحقاق</th>
-                                    <th class="border-bottom-0">المنتج</th>
-                                    <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">تاريخ الإستحقاق</th>
-                                    <th class="border-bottom-0">الخصم</th>
-                                    <th class="border-bottom-0">نسبة الضريبة</th>
-                                    <th class="border-bottom-0">قيمة الضريبة</th>
-                                    <th class="border-bottom-0">الإجمالي</th>
-                                    <th class="border-bottom-0">الحالة</th>
-                                    <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="wd-15p border-bottom-0">#</th>
+                                    <th class="wd-15p border-bottom-0">الإسم</th>
+                                    <th class="wd-15p border-bottom-0">القسم</th>
+                                    <th class="wd-15p border-bottom-0">الوصف</th>
+                                    <th class="wd-25p border-bottom-0">الإجراءات</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="border-bottom-0">#</td>
-                                    <td class="border-bottom-0">رقم الفاتورة</td>
-                                    <td class="border-bottom-0">تاريخ الفاتورة</td>
-                                    <td class="border-bottom-0">تاريخ الإستحقاق</td>
-                                    <td class="border-bottom-0">المنتج</td>
-                                    <td class="border-bottom-0">القسم</td>
-                                    <td class="border-bottom-0">تاريخ الإستحقاق</td>
-                                    <td class="border-bottom-0">الخصم</td>
-                                    <td class="border-bottom-0">نسبة الضريبة</td>
-                                    <td class="border-bottom-0">قيمة الضريبة</td>
-                                    <td class="border-bottom-0">الإجمالي</td>
-                                    <td class="border-bottom-0">الحالة</td>
-                                    <td class="border-bottom-0">ملاحظات</td>
-                                </tr>
+                                @foreach ($products as $index => $product)
+                                    <tr>
+                                        <td class="wd-15p border-bottom-0">{{ $index + 1 }}</td>
+                                        <td class="wd-15p border-bottom-0">{{ $product->name }}</td>
+                                        <td class="wd-15p border-bottom-0">{{ $product->section->name }}</td>
+                                        <td class="wd-15p border-bottom-0">{{ $product->description }}</td>
+                                        <td class="wd-25p border-bottom-0">
+                                            <a href="#" class="btn btn-primary btn-sm editBtn" data-target="#editmodal"
+                                                data-toggle="modal" data-id="{{ $product->id }}">
+                                                Edit
+                                            </a>
+
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="post"
+                                                style="display: inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <a href="#" class="btn btn-danger btn-sm deleteBtn">Delete</a>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>
@@ -86,9 +93,63 @@
             </div>
         </div>
         <!--/div-->
-
     </div>
     <!-- /row -->
+
+    <!-- add modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">إضافة منتج</h6><button aria-label="Close" class="close"
+                        data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <form action="{{ route('products.store') }}" method="post">
+                    <div class="modal-body">
+                        @csrf
+
+                        <div class="form-group">
+                            <label for="">إسم المنتج</label>
+                            <input type="text" name="name" id="" class="form-control"
+                                placeholder="من فضلك قم بكتابة إسم المنتج">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="">الوصف</label>
+                            <textarea name="description" id="" cols="30" rows="10" class="form-control"
+                                placeholder="قم بكتابة وصف المنتج(إختياري)"></textarea>
+                        </div>
+
+                        <select name="section_id" id="" class="form-control">
+                            <option value="">قم بإختيار القسم</option>
+                            @foreach ($sections as $section)
+                                <option value="{{ $section->id }}">{{ $section->name }}</option>
+                            @endforeach
+                        </select>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn ripple btn-primary" type="submit">إضافة</button>
+                        <button class="btn ripple btn-secondary" data-dismiss="modal" type="button">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End add modal -->
+
+
+    <!-- Edit modal -->
+    <div class="modal" id="editmodal">
+        <div class="modal-dialog edit-modal-container" role="document">
+
+        </div>
+    </div>
+    <!-- End Edit modal -->
+
+
     </div>
     <!-- Container closed -->
     </div>
@@ -127,14 +188,55 @@
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    {{-- <script src="{{ URL::asset('assets/plugins/datatable/js/jszip.min.js') }}"></script> --}}
+    {{-- <script src="{{ URL::asset('assets/plugins/datatable/js/pdfmake.min.js') }}"></script> --}}
+    {{-- <script src="{{ URL::asset('assets/plugins/datatable/js/vfs_fonts.js') }}"></script> --}}
     <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    {{-- <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.print.min.js') }}"></script> --}}
+    {{-- <script src="{{ URL::asset('assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script> --}}
     <script src="{{ URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/datatable/js/responsive.bootstrap4.min.js') }}"></script>
     <!--Internal  Datatable js -->
     <script src="{{ URL::asset('assets/js/table-data.js') }}"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('.editBtn').on('click', function(e) {
+                e.preventDefault();
+
+                if ($('.editmodal-content').length > 0) {
+                    $('.editmodal-content').remove();
+                }
+
+                // send ajax with section id to get section data 
+                let id = $(this).data('id');
+                let url = "{{ route('products.edit', ':id') }}";
+                url = url.replace(':id', id);
+
+
+                $.ajax({
+                    // type: "get",
+                    url: url,
+                    // dataType: "json",
+
+                    success: function(data) {
+                        // console.log('success', data);
+                        console.log(data.status === 'success');
+                        if (data.status === 'success') {
+                            $('.edit-modal-container').append(data.data);
+                        }
+                    },
+
+
+                    error: function(data) {
+                        console.log('error', data);
+                    },
+                });
+
+            });
+
+        });
+    </script>
+
 @endsection

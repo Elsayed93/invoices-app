@@ -44,7 +44,7 @@
                         <h4 class="card-title mg-b-0">الأقسام</h4>
                         <i class="mdi mdi-dots-horizontal text-gray"></i>
                     </div>
-                    <a class="btn ripple btn-primary" data-target="#modaldemo1" data-toggle="modal" href="">إضافة قسم</a>
+                    <a class="btn ripple btn-primary" data-target="#addModal" data-toggle="modal" href="">إضافة قسم</a>
                 </div>
 
                 <div class="card-body">
@@ -89,8 +89,8 @@
     </div>
     <!-- /row -->
 
-    <!-- Basic modal -->
-    <div class="modal" id="modaldemo1">
+    <!-- add modal -->
+    <div class="modal" id="addModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
@@ -124,7 +124,7 @@
             </div>
         </div>
     </div>
-    <!-- End Basic modal -->
+    <!-- End add modal -->
 
 
     <!-- Edit modal -->
@@ -191,6 +191,10 @@
             $('.editBtn').on('click', function(e) {
                 e.preventDefault();
 
+                if ($('.editmodal-content').length > 0) {
+                    $('.editmodal-content').remove();
+                }
+
                 // send ajax with section id to get section data 
                 let id = $(this).data('id');
                 let url = "{{ route('sections.edit', ':id') }}";
@@ -221,14 +225,5 @@
         });
     </script>
 
-    {{-- delete row --}}
-    <script>
-        $(document).ready(function() {
-            $('.deleteBtn').on('click', function(e) {
-                e.preventDefault();
-                $(this).closest('form').submit();
 
-            });
-        });
-    </script>
 @endsection

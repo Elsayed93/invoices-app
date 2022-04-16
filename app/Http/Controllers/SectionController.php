@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Section\SectionRequest;
+use App\Http\Requests\SectionRequest;
 use App\Models\Section;
-use Illuminate\Http\Request;
 
 class SectionController extends Controller
 {
@@ -17,16 +16,6 @@ class SectionController extends Controller
     {
         $sections = Section::all();
         return view('sections.index', compact('sections'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -46,17 +35,6 @@ class SectionController extends Controller
         } else {
             return redirect()->back()->with('error', 'فضلت عملية الإضافة');
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Section  $Section
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Section $section)
-    {
-        //
     }
 
     /**
