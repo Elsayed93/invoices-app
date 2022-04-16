@@ -52,7 +52,7 @@
 
                 <ul class="slide-menu">
                     <li>
-                        <a class="slide-item" href="{{ url('/' . ($page = 'chart-chartjs')) }}">
+                        <a class="slide-item" href="{{ route('invoices.index') }}">
                             قائمة الفواتير
                         </a>
                     </li>
@@ -137,21 +137,21 @@
 
             <li class="slide">
                 <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}">
-					<i class="la la-cog"></i>
-					<span class="side-menu__label">الإعدادات</span>
+                    <i class="la la-cog"></i>
+                    <span class="side-menu__label">الإعدادات</span>
                     <i class="angle fe fe-chevron-down"></i>
                 </a>
 
                 <ul class="slide-menu">
                     <li>
-                        <a class="slide-item" href="{{ url('/' . ($page = 'chart-chartjs')) }}">
-                            إضافة قسم
+                        <a class="slide-item" href="{{ route('sections.index')}}">
+                            الأقسام
                         </a>
                     </li>
 
                     <li>
-                        <a class="slide-item" href="{{ url('/' . ($page = 'chart-morris')) }}">
-                            إضافة منتج
+                        <a class="slide-item" href="{{ route('products.index') }}">
+                            المنتجات
                         </a>
                     </li>
                 </ul>
