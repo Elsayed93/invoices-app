@@ -90,4 +90,5 @@ class SectionController extends Controller
             return redirect()->back()->with('error', 'فضلت عملية المسح');
         }
     }
+
 }

@@ -87,4 +87,15 @@ class ProductController extends Controller
             return redirect()->back()->with('error', 'فضلت عملية المسح');
         }
     }
+
+    public function getProductData($section_id)
+    {
+        // get all products with section id 
+        $sectionProducts = Product::where('section_id', $section_id)->get();
+
+        return response()->json([
+            'data' => $sectionProducts,
+            'status' => 'success',
+        ]);
+    }
 }

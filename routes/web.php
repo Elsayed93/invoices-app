@@ -34,10 +34,12 @@ Route::middleware('auth')->group(function () {
 
     // invoices 
     Route::resource('invoices', InvoiceController::class);
-    
+
     // sections
     Route::resource('sections', SectionController::class)->except(['show', 'create']);
 
     // products
     Route::resource('products', ProductController::class)->except(['show', 'create']);
+    // getProductData
+    Route::get('product/{section}', [ProductController::class, 'getProductData'])->name('section.products');
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -15,7 +16,7 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::all();
-        return view('invoices.index',compact('invoices'));
+        return view('invoices.index', compact('invoices'));
     }
 
     /**
@@ -25,7 +26,9 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        $sections = Section::select('id', 'name')->get();
+
+        return view('invoices.create', compact('sections'));
     }
 
     /**
