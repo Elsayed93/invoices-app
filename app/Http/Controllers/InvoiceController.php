@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\InvoiceStatus;
+use App\Http\Requests\Invoice\StoreRequest;
 use App\Models\Invoice;
 use App\Models\Section;
 use Illuminate\Http\Request;
@@ -15,7 +17,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all();
+        $invoices = Invoice::with('section')->get();
         return view('invoices.index', compact('invoices'));
     }
 
@@ -37,9 +39,25 @@ class InvoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+
+        $data = $request->validated();
+        // attachment
+        if($request->has('invoice_attachment')){
+            $data['invoice_attachment'] = $request->file('invoice_attachment')->store('invoice_attachments');
+        }
+        
+        $data['status'] = InvoiceStatus::UNPAID;
+        $data['user_id'] = auth()->user()->id;
+
+        $invoice = Invoice::create($data);
+
+        if ($invoice) {
+            return redirect()->route('invoices.index')->with('success', 'تمت الإضافة بنجاح');
+        } else {
+            return redirect()->back()->with('error', 'فشلت عملية الإضافة');
+        }
     }
 
     /**

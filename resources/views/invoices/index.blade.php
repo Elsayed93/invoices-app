@@ -65,31 +65,44 @@
                                     <th class="border-bottom-0">تاريخ الإستحقاق</th>
                                     <th class="border-bottom-0">المنتج</th>
                                     <th class="border-bottom-0">القسم</th>
-                                    <th class="border-bottom-0">تاريخ الإستحقاق</th>
+                                    <th class="border-bottom-0">مبلغ التحصيل</th>
+                                    <th class="border-bottom-0">العمولة</th>
                                     <th class="border-bottom-0">الخصم</th>
                                     <th class="border-bottom-0">نسبة الضريبة</th>
                                     <th class="border-bottom-0">قيمة الضريبة</th>
                                     <th class="border-bottom-0">الإجمالي</th>
                                     <th class="border-bottom-0">الحالة</th>
                                     <th class="border-bottom-0">ملاحظات</th>
+                                    <th class="border-bottom-0">الملحقات</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="border-bottom-0">#</td>
-                                    <td class="border-bottom-0">رقم الفاتورة</td>
-                                    <td class="border-bottom-0">تاريخ الفاتورة</td>
-                                    <td class="border-bottom-0">تاريخ الإستحقاق</td>
-                                    <td class="border-bottom-0">المنتج</td>
-                                    <td class="border-bottom-0">القسم</td>
-                                    <td class="border-bottom-0">تاريخ الإستحقاق</td>
-                                    <td class="border-bottom-0">الخصم</td>
-                                    <td class="border-bottom-0">نسبة الضريبة</td>
-                                    <td class="border-bottom-0">قيمة الضريبة</td>
-                                    <td class="border-bottom-0">الإجمالي</td>
-                                    <td class="border-bottom-0">الحالة</td>
-                                    <td class="border-bottom-0">ملاحظات</td>
-                                </tr>
+                                @foreach ($invoices as $index => $invoice)
+                                    <tr>
+                                        <td class="border-bottom-0">{{ $index + 1 }}</td>
+                                        <td class="border-bottom-0">{{ $invoice->invoice_number }}</td>
+                                        <td class="border-bottom-0"> {{ $invoice->invoice_date }}</td>
+                                        <td class="border-bottom-0"> {{ $invoice->due_date }}</td>
+                                        <td class="border-bottom-0">{{ $invoice->product_id }}</td>
+                                        <td class="border-bottom-0">{{ $invoice->section->name }}</td>
+                                        <td class="border-bottom-0"> {{ $invoice->amount_collection }}</td>
+                                        <td class="border-bottom-0">{{ $invoice->amount_commision }}</td>
+                                        <td class="border-bottom-0"> {{ $invoice->discount }}</td>
+                                        <td class="border-bottom-0"> {{ $invoice->vat_rate }}</td>
+                                        <td class="border-bottom-0">{{ $invoice->vat_value }}</td>
+                                        <td class="border-bottom-0">{{ $invoice->total }}</td>
+                                        <td class="border-bottom-0">
+                                            {{ $invoice->invoiceStatus($invoice->status) }}
+                                        </td>
+                                        <td class="border-bottom-0">{{ $invoice->note }}</td>
+                                        <td class="border-bottom-0">
+                                            <img src="{{ asset('storage/' . $invoice->invoice_attachment) }}" width="200"
+                                                alt="" srcset="">
+                                        </td>
+
+                                    </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

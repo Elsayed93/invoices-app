@@ -38,7 +38,6 @@ class SectionRequest extends FormRequest
 
     private function updateRequest()
     {
-        // dd($this->section->id);
         return [
             'name' => 'required|max:190|unique:sections,name,' . $this->section->id,
             'description' => 'sometimes|string|max:60000',
